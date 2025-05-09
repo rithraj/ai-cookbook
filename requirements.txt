@@ -1,3 +1,4 @@
-spacy==3.7.2
-spacy-layout
-spacy-transformers==0.3.0
+openai
+pydantic
+PyMuPDF
+pandas
