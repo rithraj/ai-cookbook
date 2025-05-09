@@ -18,6 +18,13 @@ def recipe_to_row(recipe: Recipe) -> pd.DataFrame:
     }
     return pd.DataFrame([data])
 
+def apply_meal_and_servings_defaults(data: dict) -> dict:
+    if data.get("servings") is None:
+        data["servings"] = 2
+    if data.get("meal") is None:
+        data["meal"] = "NA"
+    return data
+
 def cookbook_create(pdf_name: str) -> pd.DataFrame:
     pdf_path = f"cookbooks/pdfs/{pdf_name}"
     name = pdf_name.split(".")[0]
@@ -61,7 +68,8 @@ def cookbook_create(pdf_name: str) -> pd.DataFrame:
 
             try:
                 recipe_data = json.loads(response_text)
-                recipe = Recipe(**recipe_data)
+                data = apply_meal_and_servings_defaults(recipe_data)
+                recipe = Recipe(**data)
                 df_row = recipe_to_row(recipe)
                 rows.append(df_row)
                 print(f"Recipe {i} completed successfully.")
