@@ -21,10 +21,10 @@ def recipe_to_row(recipe: Recipe) -> pd.DataFrame:
 def cookbook_create(pdf_name: str) -> pd.DataFrame:
     pdf_path = f"cookbooks/pdfs/{pdf_name}"
     name = pdf_name.split(".")[0]
-    text_dir = f"cookbooks/pdfs/{name}"
+    text_dir = f"cookbooks/txt/{name}"
 
     rows = []
-
+    i = 1
     for filename in os.listdir(text_dir):
         if filename.endswith(".txt"):
             file_path = os.path.join(text_dir, filename)
@@ -64,6 +64,8 @@ def cookbook_create(pdf_name: str) -> pd.DataFrame:
                 recipe = Recipe(**recipe_data)
                 df_row = recipe_to_row(recipe)
                 rows.append(df_row)
+                print(f"Recipe {i} completed successfully.")
+                i += 1
             except Exception as e:
                 print(f"Error parsing {filename}:", e)
 

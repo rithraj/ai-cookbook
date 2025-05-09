@@ -7,7 +7,7 @@ def parse_cookbook(pdf_name):
     # Get basename without extension
     name = pdf_name.split(".")[0]
 
-    output_dir = f"cookbooks/pdfs/{name}"
+    output_dir = f"cookbooks/txt/{name}"
     os.makedirs(output_dir, exist_ok=True)
 
     # Load the PDF
